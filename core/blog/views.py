@@ -4,8 +4,10 @@ from django.shortcuts import render
 from django.views.generic import DeleteView,UpdateView,CreateView,FormView,ListView,TemplateView,RedirectView,DetailView
 from .models import Post,Category
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
 from .forms import ContactForm,PostForm
 from django.contrib.auth.mixins import PermissionRequiredMixin,LoginRequiredMixin
+
 # Create your views here.
 
 # Create your views here.
@@ -96,3 +98,4 @@ class PostEdit(LoginRequiredMixin,UpdateView):
 class  PostDelete(DeleteView):
     model = Post
     success_url = '/blog/post/'
+    
