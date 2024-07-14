@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "accounts",
     "blog",
     "rest_framework",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -150,8 +151,10 @@ AUTH_USER_MODEL = 'accounts.User'
 
 
 #Rest framework settings
-REST_FRAMEWORK = {
+# REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [
     #     'rest_framework.permissions.IsAuthenticated',
     # ]
-}
+# }
+
+REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }

@@ -8,12 +8,18 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView  #for classbased views
 from rest_framework.generics import GenericAPIView , ListAPIView , ListCreateAPIView , RetrieveAPIView , RetrieveUpdateDestroyAPIView
 from rest_framework import mixins,viewsets
+from .permissions import IsOwnerOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter,OrderingFilter
+from .paginations import LargeResultsSetPagination,DefaultPagination
+from .filters import PostFilters
 
 class PostList(ListCreateAPIView): #GenericAPIView,mixins.ListModelMixin, mixins.CreateModelMixin
     """ Getting a list of post and creating new post by class based views"""
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
     serializer_class = PostSerializer  #for form in api view
     queryset = Post.objects.filter(status=True)
+    filter_backends = [DjangoFilterBackend]
     
     
     '''def get(self,request,*args , **kwargs):
@@ -25,7 +31,7 @@ class PostList(ListCreateAPIView): #GenericAPIView,mixins.ListModelMixin, mixins
     
     def post(self,request,*args , **kwargs):
         return self.create(request,*args , **kwargs)'''
-
+ 
 
 class PostDetail(RetrieveUpdateDestroyAPIView): #GenericAPIView,mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin
     """ Getting a list of post and creating new post by class based views"""
@@ -45,13 +51,20 @@ class PostDetail(RetrieveUpdateDestroyAPIView): #GenericAPIView,mixins.RetrieveM
 
 #example of viewset in class based view
 class PostModelViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
+    filter_backends = [DjangoFilterBackend,SearchFilter,OrderingFilter]
+    # filterset_fields = ['category','author','status']    #Normal
+    filterset_fields = {'category':["exact","in"], 'author':["exact"],'status':["exact"]}   #view filtering
+    # filterset_fields = PostFilters   #based on filters.py filtering(it like up but it defines in different classes)
+    search_fields = ['title', 'content']
+    ordering_fields = ['published_date']
+    pagination_class = DefaultPagination
     
     
     @action(methods = ['get'], detail =False)
-    def get_ok(self,request):
+    def get_ok(self,request): 
         return Response({'detail':'OK'})
     
     # def list(self,request):
