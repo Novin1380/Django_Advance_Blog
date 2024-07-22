@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from decouple import config
+from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-s=cp@p3-^m71k)agw&ax7l0bag03$)#1d=wnrg2c088571c49l'
-# SECRET_KEY = config('SECRET_KEY')
+# SECRET_KEY = 'django-insecure-s=cp@p3-^m71k)agw&ax7l0bag03$)#1d=wnrg2c088571c49l'
+SECRET_KEY = config('SECRET_KEY' , default="test")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = config('DEBUG', cast=bool)
+# DEBUG = True
+DEBUG = config('DEBUG', cast=bool , default=True)
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = config(
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     "django_filters",
     'drf_yasg',
+    "rest_framework_simplejwt",
 ]
 
 MIDDLEWARE = [
@@ -165,5 +167,15 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ]
  }
+
+# Simple jwt settings sample
+# SIMPLE_JWT = {
+#     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+#     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+#     "ROTATE_REFRESH_TOKENS": False,
+#     "BLACKLIST_AFTER_ROTATION": False,
+#     "UPDATE_LAST_LOGIN": False,
+# }
