@@ -1,0 +1,20 @@
+name: Django Project Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup docker compose
+      run: docker-composer up -d
+    - name: Run tests
+      run: docker exec backend sh -c "flake8 && pytests ."
