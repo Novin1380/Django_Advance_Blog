@@ -15,7 +15,7 @@ app_name = "blog"
 
 urlpatterns = [
     # path('fbv-index', indexView, name= "fbv-test"),
-    path("",IndexView.as_view(),name="index"),
+    path("", IndexView.as_view(), name="index"),
     # path('cbv-index', TemplateView.as_view(template_name="index.html")),
     path("cbv-index", IndexView.as_view(), name="cbv-index"),
     # path('go-to-index/', RedirectView.as_view(pattern_name = "blog:cbv-index" ), name='go-to-maktabkhooneh'),
