@@ -8,6 +8,7 @@ from .views import (
     RedirectToMaktab,
     PostList,
     PostDetail,
+    PostListAPI,
 )
 
 
@@ -20,6 +21,7 @@ urlpatterns = [
     path("cbv-index", IndexView.as_view(), name="cbv-index"),
     # path('go-to-index/', RedirectView.as_view(pattern_name = "blog:cbv-index" ), name='go-to-maktabkhooneh'),
     # path('go-to-maktabkhooneh/<int:pk>', RedirectToMaktab.as_view(),name="go-to-maktab"),
+    path("post/api/", PostListAPI.as_view(), name="post-list-api"),
     path("post/", PostList.as_view(), name="post-list"),
     path("post/<int:pk>/", PostDetail.as_view(), name="post-detail"),
     path("post/create/", PostCreate.as_view(), name="post-create"),

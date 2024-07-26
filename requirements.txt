@@ -22,3 +22,6 @@ flake8
 pytest
 pytest-django
 Faker
+
+#header for api 
+django-cors-headers

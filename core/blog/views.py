@@ -72,7 +72,7 @@ class PostList(PermissionRequiredMixin, LoginRequiredMixin, ListView):
     #     posts = Post.objects.filter(status = True)
     #     return posts
     context_object_name = "posts"
-    paginate_by = 2
+    paginate_by = 5
     ordering = "-id"
     permission_required = "blog.view_post"
 
@@ -112,3 +112,8 @@ class PostEdit(LoginRequiredMixin, UpdateView):
 class PostDelete(DeleteView):
     model = Post
     success_url = "/blog/post/"
+
+
+
+class PostListAPI(TemplateView):
+    template_name = 'blog/post_list_api.html'

@@ -1,6 +1,27 @@
+#main modules
 django >3.2,<3.3
 python-decouple
 Pillow
 djangorestframework
-markdown
-django-filter
+
+#third party modules
+markdown       
+django-filter  
+drf-yasg[validation]
+djoser
+djangorestframework-simplejwt
+
+
+#email third party modules
+django-mail-templated
+
+
+#reformatiing and tests
+black
+flake8
+pytest
+pytest-django
+Faker
+
+#header for api 
+django-cors-headers
