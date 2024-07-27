@@ -26,3 +26,9 @@ Faker
 
 #header for api 
 django-cors-headers
+
+#caching and redis
+celery
+redis
+django-celery-beat
+django-redis

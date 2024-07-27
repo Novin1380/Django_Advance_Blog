@@ -4,7 +4,7 @@ from .serializers import (
     RegistrationSerializer,
     ProfileSerializer,
     ChangePasswordSerializer,
-    TokenObtainPairSerializer,
+    TokenCustomObtainPairSerializer,
     CustomAuthTokenSerializer,
 )
 from rest_framework.response import Response
@@ -79,7 +79,7 @@ class CustomDiscardAuthToken(APIView):
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
-    serializer_class = TokenObtainPairSerializer
+    serializer_class = TokenCustomObtainPairSerializer
 
 
 class ChangePasswordApiView(generics.GenericAPIView):

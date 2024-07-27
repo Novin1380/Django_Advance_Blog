@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "mail_templated",
     "djoser",
     "corsheaders",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -203,3 +204,23 @@ EMAIL_PORT = 25
 
 # for all ports access tu api header
 CORS_ALLOWED_ALL_ORIGINS = True
+
+
+# celery configurations
+CELERY_BROKER_URL = "redis://redis:6379/1"
+
+
+# CELERY_BEAT_SCHEDULE
+
+
+
+# caching configs
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}
