@@ -17,6 +17,9 @@ djangorestframework-simplejwt
 django-mail-templated
 
 
+# deployements madules
+gunicorn
+
 #reformatiing and tests
 black
 flake8

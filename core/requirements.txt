@@ -16,6 +16,8 @@ djangorestframework-simplejwt
 #email third party modules
 django-mail-templated
 
+# deployements madules
+gunicorn
 
 #reformatiing and tests
 black
